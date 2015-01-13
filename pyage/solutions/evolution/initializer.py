@@ -3,6 +3,9 @@ from pyage.core.emas import EmasAgent
 from pyage.core.operator import Operator
 from pyage.solutions.evolution.genotype import PointGenotype, FloatGenotype
 
+from pyage.elect.el_genotype import Votes
+from pyage.elect.el_init import VotesInitializer
+
 class PointInitializer(Operator):
     def __init__(self, size=100, lowerbound=0.0, upperbound=1.0):
         super(PointInitializer, self).__init__(PointGenotype)
@@ -16,7 +19,6 @@ class PointInitializer(Operator):
 
     def __randomize(self):
         return uniform(self.lowerbound, self.upperbound)
-
 
 class FloatInitializer(Operator):
     def __init__(self, dims=3, size=100, lowerbound=0.0, upperbound=1.0):

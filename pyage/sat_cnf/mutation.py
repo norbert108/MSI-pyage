@@ -11,9 +11,11 @@ class CNFMutation(AbstractMutation):
 
     def mutate(self, genotype):
         random.seed()
-        mutated_values = random.randint(0, len(genotype.assignment)+1)
+        mutated_values = random.randint(0, len(genotype.assignment))
+        print "SAMPEL {0}".format(mutated_values)
 
-        indices = random.sample(range(len(genotype.assignment)), mutated_values)
+        # indices = random.sample(range(len(genotype.assignment)), mutated_values)
+        indices = [0, 1]
 
         mutated_assignment = list(genotype.assignment)
         for index in indices:

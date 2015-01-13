@@ -6,6 +6,7 @@ import math
 from pyage.core import address
 
 from pyage.core.agent.aggregate import AggregateAgent
+from pyage.core.agent.agent import generate_agents, Agent
 from pyage.core.emas import EmasService
 from pyage.core.locator import GridLocator
 from pyage.core.migration import ParentMigration
@@ -13,9 +14,10 @@ from pyage.core.stats.gnuplot import StepStatistics
 from pyage.core.stop_condition import StepLimitStopCondition
 
 from pyage.elect.el_crossover import Crossover
-from pyage.elect.el_eval import kApprovalEvaluator 
+from pyage.elect.el_eval import kApprovalEvaluator
 from pyage.elect.el_init import EmasInitializer, root_agents_factory, VotesInitializer
 from pyage.elect.el_mutation import Mutation
+from pyage.elect.el_selection import TournamentSelection
 from pyage.elect.naming_service import NamingService
 
 logger = logging.getLogger(__name__)
@@ -32,7 +34,7 @@ votes_nr = len(votes)
 
 agents_count = 2
 logger.debug("EMAS, %s agents", agents_count)
-agents = root_agents_factory(agents_count, AggregateAgent)
+agents = generate_agents("agent", agents_count, Agent)
 
 stop_condition = lambda: StepLimitStopCondition(20000)
 
@@ -51,6 +53,8 @@ budget = 0
 evaluation = lambda: kApprovalEvaluator(k_approval_coeff,[simple_cost_func]*votes_nr,budget, init_c_places, chosen_candidate)
 crossover = lambda: Crossover(size=30)
 mutation = lambda: Mutation(probability=0.2, evol_probability=0.5)
+
+operators = lambda: [evaluation, TournamentSelection(size=125, tournament_size=125)]
 
 def simple_cost_func(x): return abs(x)*10
 

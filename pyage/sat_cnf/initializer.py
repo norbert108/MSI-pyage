@@ -29,6 +29,7 @@ def cnf_emas_initializer(description, variables, energy=10, size=100):
         for j in range(variables):
             assignment.append("T" if random.uniform(0, 1) < 0.5 else "F")
 
-        agent = EmasAgent(CNF(description, assignment), energy)
+        agent = EmasAgent(CNF(description=description, assignment=assignment), energy)
         agents[agent.get_address()] = agent
+        # print "INIT {0}".format(agent.genotype)
     return agents

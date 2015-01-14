@@ -19,6 +19,7 @@ class EmasAgent(Addressable):
         self.steps += 1
         try:
             neighbour = self.locator.get_neighbour(self)
+            # print "EMAS {0}".format(self)
             if neighbour:
                 if self.emas.should_die(self):
                     self.death(neighbour)

@@ -6,20 +6,17 @@ import random
 
 
 class CNFMutation(AbstractMutation):
-    def __init__(self, type=None, probability=0.01):
+    def __init__(self, type=None, probability=0.1):
         super(CNFMutation, self).__init__(CNF, probability)
 
     def mutate(self, genotype):
         random.seed()
-        mutated_values = random.randint(0, len(genotype.assignment))
-        print "SAMPEL {0}".format(mutated_values)
+        mutated_values = random.randint(0, len(genotype.assignment)-1)
 
-        # indices = random.sample(range(len(genotype.assignment)), mutated_values)
-        indices = [0, 1]
+        indices = random.sample(range(len(genotype.assignment)), mutated_values)
 
         mutated_assignment = list(genotype.assignment)
         for index in indices:
-            mutated_assignment[index] = "T" if genotype.assignment[index] == "F" else "T"
+            mutated_assignment[index] = "T" if mutated_assignment[index] == "F" else "F"
 
         genotype.assignment = mutated_assignment
-        return genotype.assignment

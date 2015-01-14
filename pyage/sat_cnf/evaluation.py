@@ -54,5 +54,5 @@ class CNFEvaluation(Operator):
             if clause_val:
                 true_clauses += 1
 
-        print "DD {0}, {1}, {2}".format(true_clauses, 0, 0)
+        print "DD {0}, {1}, {2}".format(true_clauses, genotype.assignment, 0)
         return true_clauses

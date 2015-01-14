@@ -2,6 +2,7 @@ __author__ = 'norbert'
 from pyage.solutions.evolution.crossover import AbstractCrossover
 from genotype import CNF
 
+
 class CNFCrossover(AbstractCrossover):
     def __init__(self, size=5):
         super(CNFCrossover, self).__init__(CNF, size)
